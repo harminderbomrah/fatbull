@@ -1,0 +1,78 @@
+body{
+  height: 100%;
+}
+.login-center{
+  padding-top: 10%;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.form{
+  min-width: 200px;
+}
+
+.form  h3{
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.form .option{
+  display: inline-block;
+  width: 100%;
+}
+
+footer{
+  padding: 15px 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #eee;
+  color: #888;
+  text-align: center;
+}
+
+.line{
+  display: inline-block;
+  min-width: 45%;
+  border-top: 1px solid #888;
+}
+
+.mediums{
+  margin: 10px;
+}
+
+.mediums ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+.mediums ul li {
+  display: inline-block;
+}
+
+.mediums .medium-option{
+  margin: 10px 5px;
+}
+.mediums .medium-option .logo{
+  max-width: 35px;
+}
+
+.alert{
+  margin-top: 15px;
+}
+
+.verify{
+  margin-top: 15%;
+  font-size: 25px;
+}
+
+.verify .verify-container{
+  max-width: 600px;
+  margin: auto;
+}
+
+.verify .resend{
+  font-size: 20px;
+}
