@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class HomeController extends Controller
 {
@@ -31,10 +38,26 @@ class HomeController extends Controller
         return view('home');
     }
 
+    /**
+     * Show the profile page.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
     public function profile()
     {
         return view('profile');
     }
+
+    /**
+     * updating profile name
+     * @param Request $request
+     * @param mixed $id
+     * @return Redirector|RedirectResponse
+     * @throws ValidationException
+     * @throws BadRequestException
+     * @throws BindingResolutionException
+     */
 
     public function updateProfile(Request $request, $id)
     {
@@ -43,10 +66,10 @@ class HomeController extends Controller
             'name' => [
                 'required'
             ]
-        ])->validate();
+        ])->validate(); // validator for required name
         if ($user !== null) {
             $user->name = $request->get('name');
-            $user->save();
+            $user->save(); // updating name
         }
         return redirect('/profile')->with('status', 'Name updated successfully!!!');
     }
@@ -56,14 +79,23 @@ class HomeController extends Controller
         return view('password');
     }
 
+    /**
+     * method to update password
+     * @param Request $request
+     * @param mixed $id
+     * @return Redirector|RedirectResponse
+     * @throws BindingResolutionException
+     * @throws ValidationException
+     */
+
     public function updatePassword(Request $request, $id)
     {
         $user = User::find($id);
         if ($user === null) {
             return redirect('/logout');
         }
-        
-        $validator = Validator::make($request->all(), [
+
+        Validator::make($request->all(), [
             'password' => [
                 'required'
             ],
@@ -75,12 +107,12 @@ class HomeController extends Controller
                 'required',
                 'same:new_password'
             ]
-        ])->validate();
+        ])->validate(); // validating the passwords
 
-        if (Hash::check($request->password, $user->password)) {
+        if (Hash::check($request->password, $user->password)) { // checking if the old password is authentic
             $user->fill([
                 'password' => Hash::make($request->new_password)
-            ])->save();
+            ])->save(); // updating password
             return redirect('/profile/password')->with('status', 'Password updated successfully!!!');
         } else {
             return redirect('/profile/password')->with('passworderror', 'Old password is incorrect');

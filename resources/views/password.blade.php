@@ -63,6 +63,15 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <ul class="col-md-6 offset-md-4">
+                                <li>contains at least one lower character</li>
+                                <li>contains at least one upper character</li>
+                                <li>contains at least one digit character</li>
+                                <li>contains at least one special character</li>
+                                <li>contains at least 8 characters</li>
+                            </ul>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
