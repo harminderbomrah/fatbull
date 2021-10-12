@@ -32,15 +32,16 @@
                                 {{ Auth::user()->email}}
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit') }}
                                 </button>
+                                @if(Auth::user()->social_account === 0)
                                     <a class="btn btn-link" href="/profile/password">
                                         {{ __('Reset password') }}
                                     </a>
+                                @endif
                             </div>
                         </div>
                     </form>
