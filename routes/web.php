@@ -20,20 +20,21 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return redirect()->route('home');
 });
-// Route::get('/', [DashboardController::class, 'index'])->middleware('App\Http\Middleware\Authenticate')->name('dashboard');
 
-// Route::get('/login', [AuthController::class, 'index'])->name('login');
-// Route::get('/logout', [AuthController::class, 'signOut'])->name('logout');
-// Route::post('/login', [AuthController::class, 'login']);
-// Route::get('/register', [AuthController::class, 'registration'])->name('register');
-// Route::post('/register', [AuthController::class, 'createUser']);
-// Route::get('/emailverify', [AuthController::class, 'emailVerify']);
 Auth::routes(['verify' => true]);
 // social login
-Route::get('auth/facebook', [App\Http\Controllers\Auth\FacebookController::class, 'fbRedirect'])->name('facebook');
+Route::get('auth/facebook', [App\Http\Controllers\Auth\FacebookController::class, 'socialRedirect'])->name('facebook');
 Route::get('auth/facebook/callback', [App\Http\Controllers\Auth\FacebookController::class, 'login']);
-Route::get('auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'fbRedirect'])->name('google');
+Route::get('auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'socialRedirect'])->name('google');
 Route::get('auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'login']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+
+Route::post('/profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile']);
+
+Route::get('/profile/password', [App\Http\Controllers\HomeController::class, 'password']);
+
+Route::post('/profile/{id}/password', [App\Http\Controllers\HomeController::class, 'updatePassword']);

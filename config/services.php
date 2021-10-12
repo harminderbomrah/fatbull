@@ -31,14 +31,14 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '613818930029278',
-        'client_secret' => '8b723660c5286f1df69434b54d2a6835',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => env('APP_URL') . '/auth/facebook/callback',
     ],
     
     'google' => [
-        'client_id' => '666838824608-1vvgvra5i915bsee42491qp1qrrg7pvi.apps.googleusercontent.com',
-        'client_secret' => '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',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('APP_URL') . '/auth/google/callback',
     ],
 ];
